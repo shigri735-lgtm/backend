@@ -52,14 +52,12 @@
 // app.use(errorMiddleware);
 
 // export default app;
-
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import cors from "cors";
 
-import dbConnection from "./database/dbConnection.js";
 import { errorMiddleware } from "./middlewares/error.js";
 
 import userRouter from "./routes/userRouter.js";
@@ -69,9 +67,9 @@ import skillRouter from "./routes/skillRouter.js";
 import softwareApplicationRouter from "./routes/softwareApplicationRouter.js";
 import projectRouter from "./routes/projectRouter.js";
 
-const app = express();
-
 dotenv.config();
+
+const app = express();
 
 app.use(
   cors({
@@ -103,8 +101,6 @@ app.use("/api/v1/message", messageRouter);
 app.use("/api/v1/skill", skillRouter);
 app.use("/api/v1/softwareapplication", softwareApplicationRouter);
 app.use("/api/v1/project", projectRouter);
-
-dbConnection();
 
 app.use(errorMiddleware);
 
