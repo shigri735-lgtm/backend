@@ -94,13 +94,13 @@ app.get("/", (req, res) => {
   res.send("Backend Running Successfully");
 });
 
-app.use("/api/v1/user", userRouter);
+app.use("/user", userRouter);
 // app.use("/api/v1", userRouter);
-app.use("/api/v1/timeline", timelineRouter);
-app.use("/api/v1/message", messageRouter);
-app.use("/api/v1/skill", skillRouter);
-app.use("/api/v1/softwareapplication", softwareApplicationRouter);
-app.use("/api/v1/project", projectRouter);
+app.use("/timeline", timelineRouter);
+app.use("/message", messageRouter);
+app.use("/skill", skillRouter);
+app.use("/softwareapplication", softwareApplicationRouter);
+app.use("/project", projectRouter);
 
 app.use(errorMiddleware);
 
