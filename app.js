@@ -71,7 +71,7 @@ dotenv.config();
 
 const app = express();
 
-app.use(
+app.use("*",
   cors({
     origin: [process.env.PORTFOLIO_URL, process.env.DASHBOARD_URL],
     methods: ["GET", "POST", "PUT", "DELETE"],
