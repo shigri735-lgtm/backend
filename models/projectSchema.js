@@ -7,6 +7,11 @@ const projectSchema = new mongoose.Schema({
   projectLink: String,
   technologies: String,
   stack: String,
+  category: {
+    type: String,
+    enum: ["MERN", "Data Science", "Other"],
+    default: "Other",
+  },
   deployed: String,
   projectBanner: {
     public_id: {
