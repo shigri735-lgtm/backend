@@ -66,25 +66,14 @@ import skillRouter from "./routes/skillRouter.js";
 import softwareApplicationRouter from "./routes/softwareApplicationRouter.js";
 import projectRouter from "./routes/projectRouter.js";
 
-// dotenv.config({ path: "./config/config.env" });
+dotenv.config({ path: "./config/config.env" });
 
 const app = express();
 
 // ✅ Sirf ek CORS — sahi tarika
 app.use(
   cors({
-    origin: function (origin, callback) {
-      const allowed = [
-        process.env.PORTFOLIO_URL,
-        process.env.DASHBOARD_URL,
-      ];
-      // ← Yeh line "Legacy server" wali 400 fix karegi
-      if (!origin || allowed.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: [process.env.PORTFOLIO_URL, process.env.DASHBOARD_URL],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
