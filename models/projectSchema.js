@@ -6,7 +6,7 @@ const projectSchema = new mongoose.Schema({
   gitRepoLink: String,
   projectLink: String,
   technologies: String,
-  
+  stack: String,
   category: {
     type: String,
     enum: ["Mate Ads", "Google Ads", "Other"],
