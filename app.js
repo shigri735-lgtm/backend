@@ -70,12 +70,31 @@ dotenv.config({ path: "./config/config.env" });
 
 const app = express();
 
+const normalizeOrigin = (value) => {
+  if (!value) return null;
+  return value.match(/^https?:\/\//) ? value : `https://${value}`;
+};
+
+const allowedOrigins = [
+  normalizeOrigin(process.env.PORTFOLIO_URL),
+  normalizeOrigin(process.env.DASHBOARD_URL),
+  "http://localhost:5174",
+  "http://localhost:5173",
+].filter(Boolean);
+
 // ✅ Sirf ek CORS — sahi tarika
 app.use(
   cors({
-    origin: [process.env.PORTFOLIO_URL, process.env.DASHBOARD_URL],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS origin denied: ${origin}`));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
+    optionsSuccessStatus: 200,
   })
 );
 
