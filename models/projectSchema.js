@@ -6,10 +6,10 @@ const projectSchema = new mongoose.Schema({
   gitRepoLink: String,
   projectLink: String,
   technologies: String,
-  stack: String,
+  
   category: {
     type: String,
-    enum: ["MERN", "Data Science", "Other"],
+    enum: ["Mate Ads", "Google Ads", "Other"],
     default: "Other",
   },
   deployed: String,
