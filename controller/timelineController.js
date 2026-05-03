@@ -3,15 +3,30 @@ import ErrorHandler from "../middlewares/error.js";
 import { Timeline } from "../models/timelineSchema.js";
 
 export const postTimeline = catchAsyncErrors(async (req, res, next) => {
-  const { title, description, from, to } = req.body;
-  const newTimeline = await Timeline.create({
+  const {
+    clientName,
+    review,
+    company,
+    role,
     title,
     description,
+    from,
+    to,
+  } = req.body;
+
+  const newTimeline = await Timeline.create({
+    clientName: clientName || title,
+    review: review || description,
+    company,
+    role,
+    title: title || clientName,
+    description: description || review,
     timeline: { from, to },
   });
+
   res.status(200).json({
     success: true,
-    message: "Timeline Added!",
+    message: "Review Added!",
     newTimeline,
   });
 });
@@ -25,7 +40,7 @@ export const deleteTimeline = catchAsyncErrors(async (req, res, next) => {
   await timeline.deleteOne();
   res.status(200).json({
     success: true,
-    message: "Timeline Deleted!",
+    message: "Review Deleted!",
   });
 });
 
